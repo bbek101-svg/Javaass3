@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import referenceBasedTreeImplementation.BSTReferencedBased;
+import utilities.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -20,20 +21,34 @@ import static org.junit.Assert.*;
 public class BSTreeUnitTest {
 
 	//
-	BSTReferencedBased myBST = new BSTReferencedBased();
+	BSTReferencedBased<Integer> myBST;
+	private Integer a;
+	private Integer b;
+	private Integer c;
+	private Integer d;
+	private Integer e;
+	private Integer f;
+	private Integer g;
 
 	/**
 	 * @throws Exception
 	 */
-	
+	@Before
 	public void setUp() throws Exception {
-		myBST = new BSTReferencedBased();
+		myBST =  new BSTReferencedBased<Integer>();
+		a = 41;
+		b = 65;
+		c = 20;
+		d = 50;
+		e = 91;
+		f = 29;
+		g = 11;
 	}
 
 	/**
 	 * @throws Exception
 	 */
-	
+	@After
 	public void tearDown() throws Exception {
 		myBST.clear();
 	}
@@ -49,11 +64,11 @@ public class BSTreeUnitTest {
 		assertThrows(TreeException.class, () -> myBST.getRoot().getElement());
 
 		// Insert into the binary search tree
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
-		assertEquals(41, myBST.getRoot().getElement());
+		assertEquals(a, myBST.getRoot().getElement());
 		assertNotEquals("41", myBST.getRoot().getElement());
 		assertNotEquals(null, myBST.getRoot().getElement());
 
@@ -67,17 +82,17 @@ public class BSTreeUnitTest {
 
 		assertEquals(0, myBST.getHeight());
 
-		assertTrue(myBST.add(41));
+		assertTrue(myBST.add(a));
 		assertEquals(1, myBST.getHeight());
 
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 		assertEquals(2, myBST.getHeight());
 
-		assertTrue(myBST.add(50));
-		assertTrue(myBST.add(91));
-		assertTrue(myBST.add(29));
-		assertTrue(myBST.add(11));
+		assertTrue(myBST.add(d));
+		assertTrue(myBST.add(e));
+		assertTrue(myBST.add(f));
+		assertTrue(myBST.add(g));
 		assertEquals(3, myBST.getHeight());
 
 	}
@@ -90,17 +105,17 @@ public class BSTreeUnitTest {
 
 		assertEquals(0, myBST.size());
 
-		assertTrue(myBST.add(41));
+		assertTrue(myBST.add(a));
 		assertEquals(1, myBST.size());
 
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 		assertEquals(3, myBST.size());
 
-		assertTrue(myBST.add(50));
-		assertTrue(myBST.add(91));
-		assertTrue(myBST.add(29));
-		assertTrue(myBST.add(11));
+		assertTrue(myBST.add(d));
+		assertTrue(myBST.add(e));
+		assertTrue(myBST.add(f));
+		assertTrue(myBST.add(g));
 		assertEquals(7, myBST.size());
 
 	}
@@ -113,7 +128,7 @@ public class BSTreeUnitTest {
 
 		assertTrue(myBST.isEmpty());
 
-		assertTrue(myBST.add(41));
+		assertTrue(myBST.add(a));
 		assertFalse(myBST.isEmpty());
 
 	}
@@ -124,9 +139,9 @@ public class BSTreeUnitTest {
 	@Test
 	public void testClear() {
 
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
 		assertFalse(myBST.isEmpty());
 		myBST.clear();
@@ -141,10 +156,10 @@ public class BSTreeUnitTest {
 	@Test
 	public void testContains() throws TreeException {
 
-		assertThrows(TreeException.class, () -> myBST.contains(1));
-		myBST.add(1);
-		assertEquals(true, myBST.contains(1));
-		assertEquals(false, myBST.contains(2));
+		assertThrows(TreeException.class, () -> myBST.contains(a));
+		myBST.add(a);
+		assertEquals(true, myBST.contains(a));
+		assertEquals(false, myBST.contains(b));
 
 	}
 
@@ -156,15 +171,15 @@ public class BSTreeUnitTest {
 	@Test
 	public void testSearch() throws TreeException {
 
-		assertThrows(TreeException.class, () -> myBST.search(41).getElement());
+		assertThrows(TreeException.class, () -> myBST.search(a).getElement());
 
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
-		assertEquals(41, myBST.search(41).getElement());
-		assertNotEquals("41", myBST.search(41).getElement());
-		assertNotEquals(null, myBST.search(41).getElement());
+		assertEquals(a, myBST.search(a).getElement());
+		assertNotEquals(b, myBST.search(a).getElement());
+		assertNotEquals(null, myBST.search(a).getElement());
 	}
 
 	/**
@@ -173,9 +188,9 @@ public class BSTreeUnitTest {
 	@Test
 	public void testAdd() {
 		// Expected Values
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(this.myBST.add(a));
+		assertTrue(this.myBST.add(b));
+		assertTrue(this.myBST.add(c));
 	}
 
 	/**
@@ -183,15 +198,15 @@ public class BSTreeUnitTest {
 	 */
 	@Test
 	public void testInorderIterator() {
+		
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
-
-		utilities.Iterator it = myBST.inorderIterator();
-		assertEquals(20, it.next());
-		assertEquals(41, it.next());
-		assertEquals(65, it.next());
+		Iterator<Integer> it = myBST.inorderIterator();
+		assertEquals(c, it.next());
+		assertEquals(a, it.next());
+		assertEquals(b, it.next());
 		assertFalse(it.hasNext());
 
 	}
@@ -202,14 +217,15 @@ public class BSTreeUnitTest {
 	@Test
 	public void testPreorderIterator() {
 
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
-		utilities.Iterator it = myBST.preorderIterator();
-		assertEquals(41, it.next());
-		assertEquals(20, it.next());
-		assertEquals(65, it.next());
+		Iterator<Integer> it = myBST.preorderIterator();
+		assertTrue(it.hasNext());
+		assertEquals(a, it.next());
+		assertEquals(c, it.next());
+		assertEquals(b, it.next());
 		assertFalse(it.hasNext());
 	}
 
@@ -219,14 +235,14 @@ public class BSTreeUnitTest {
 	@Test
 	public void testPostorderIterator() {
 
-		assertTrue(myBST.add(41));
-		assertTrue(myBST.add(65));
-		assertTrue(myBST.add(20));
+		assertTrue(myBST.add(a));
+		assertTrue(myBST.add(b));
+		assertTrue(myBST.add(c));
 
-		utilities.Iterator it = myBST.postorderIterator();
-		assertEquals(20, it.next());
-		assertEquals(65, it.next());
-		assertEquals(41, it.next());
+		Iterator<Integer> it = myBST.postorderIterator();
+		assertEquals(c, it.next());
+		assertEquals(b, it.next());
+		assertEquals(a, it.next());
 		assertFalse(it.hasNext());
 
 	}
