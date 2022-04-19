@@ -17,7 +17,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	public BSTReferencedBased(E element) {
-		this.root = new BSTreeNode<E>(element, null, null, null);
+		this.root = new BSTreeNode<E>(element, null, null);
 	}
 
 	@Override
