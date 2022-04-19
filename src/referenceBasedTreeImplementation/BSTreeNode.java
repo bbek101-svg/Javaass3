@@ -3,8 +3,8 @@ package referenceBasedTreeImplementation;
 public class BSTreeNode<E> {
 
 	private E data;
-	private BSTreeNode left;
-	private BSTreeNode right;
+	private BSTreeNode<E> left;
+	private BSTreeNode<E> right;
 
 	
 	public BSTreeNode(E elem) {
@@ -20,7 +20,6 @@ public class BSTreeNode<E> {
 	}
 
 	public int getHeight() {
-
 		return getHeight(this);
 	}
 
@@ -85,5 +84,5 @@ public class BSTreeNode<E> {
 
 		return getNumberNodes(node.left) + getNumberNodes(node.right) + 1;
 	}
-
+	
 }
