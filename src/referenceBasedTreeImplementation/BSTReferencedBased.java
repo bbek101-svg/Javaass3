@@ -17,7 +17,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	}
 
 	public BSTReferencedBased(E element) {
-		this.root = new BSTreeNode<E>(element, null, null);
+		this.root = new BSTreeNode<E>(element, null, null, null);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	private BSTreeNode<E> add(BSTreeNode<E> node, E newEntry) {
 
 		if (node == null) {
-			return new BSTreeNode(newEntry);
+			return new BSTreeNode<E>(newEntry);
 		}
 
 		if (newEntry.compareTo(node.getElement()) < 0) {
@@ -126,9 +126,9 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	@Override
 	public Iterator<E> inorderIterator() {
 
-		Stack<BSTreeNode> travStack = new Stack<BSTreeNode>();
+		Stack<BSTreeNode<E>> travStack = new Stack<BSTreeNode<E>>();
 		ArrayList<E> resultsList = new ArrayList<E>();
-		BSTreeNode curr = root;
+		BSTreeNode<E> curr = root;
 
 		while (!travStack.isEmpty() || curr != null) {
 			while (curr != null) {
@@ -165,7 +165,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	@Override
 	public Iterator<E> preorderIterator() {
 
-		Stack<BSTreeNode> travStack = new Stack<BSTreeNode>();
+		Stack<BSTreeNode<E>> travStack = new Stack<BSTreeNode<E>>();
 		ArrayList<E> resultsList = new ArrayList<E>();
 
 		if (!this.isEmpty()) {
@@ -204,7 +204,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 	@Override
 	public Iterator<E> postorderIterator() {
 
-		Stack<BSTreeNode> travStack = new Stack<BSTreeNode>();
+		Stack<BSTreeNode<E>> travStack = new Stack<BSTreeNode<E>>();
 		ArrayList<E> resultsList = new ArrayList<E>();
 
 		if (!this.isEmpty()) {
@@ -212,9 +212,9 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 		}
 
 		while (!travStack.isEmpty()) {
-			BSTreeNode current = travStack.peek();
+			BSTreeNode<E> current = travStack.peek();
 			if (current.isLeaf()) {
-				BSTreeNode node = travStack.pop();
+				BSTreeNode<E> node = travStack.pop();
 				resultsList.add((E) node.getElement());
 			} else {
 				if (current.getRight() != null) {
