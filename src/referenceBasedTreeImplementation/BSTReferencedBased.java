@@ -131,7 +131,7 @@ public class BSTReferencedBased<E extends Comparable<? super E>> implements BSTr
 		BSTreeNode<E> curr = root;
 
 		while (!travStack.isEmpty() || curr != null) {
-			while (curr != null) {
+			while (curr != null) { 
 				travStack.push(curr);
 				curr = curr.getLeft();
 			}
